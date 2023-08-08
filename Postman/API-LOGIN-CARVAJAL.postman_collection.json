@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "da2ff768-3783-411d-acc3-5966062e3144",
+		"name": "API-LOGIN-CARVAJAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tabla Persona",
+			"item": [
+				{
+					"name": "Listar Personas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarPersona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarPersona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Persona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombres\":\"Carlos Sebastian\",\r\n        \"apellidos\":\"Carvajal Florencia\",\r\n        \"identificacion\":\"1201201202\",\r\n        \"fechanacimiento\":\"1997-09-26\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearPersona",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearPersona"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Persona",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombres\":\"Sebastian Carlos\",\r\n    \"apellidos\":\"Carvajal Florencia\",\r\n    \"identificacion\":\"0942463744\",\r\n    \"fechanacimiento\":\"1997-09-26\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarPersona/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarPersona",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Persona",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarPersona/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarPersona",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla Usuario",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"dani1\",\r\n    \"persona\": {\r\n        \"nombres\":\"Daniela Alexandra\",\r\n        \"apellidos\":\"Ruiz Telenchana\",\r\n        \"identificacion\":\"1201201203\",\r\n        \"fechanacimiento\":\"2001-05-11\"\r\n    },\r\n    \"contrasenia\":\"Zaq1234%\",\r\n    \"sessionactive\":\"f\",\r\n    \"status\":\"activo\"\r\n}\r\n//NOTA 1: en el campo sesionactive utilizo \"f\" o \"t\" en representacion de false o true (solo dos valores validos) (se cambia a t cuando se inica sesion)\r\n//NOTA 2: en el campo status se manejan los valores \"activo\" o \"bloqueado\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarUsuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
