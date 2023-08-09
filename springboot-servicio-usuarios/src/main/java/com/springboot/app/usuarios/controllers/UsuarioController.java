@@ -54,10 +54,17 @@ public class UsuarioController {
 	public Usuario editar(@RequestBody Usuario usuario, @PathVariable Long id) {
 		Usuario usuarioDb = iUsuarioService.findById(id);
 		
-		//usuarioDb.setIdpersona(usuario.getIdpersona());
+			//segmento para persona   
+			Persona personaDb = iPersonaService.findById(usuarioDb.getPersona().getIdpersona());
+			personaDb.setNombres(usuario.getPersona().getNombres());
+	        personaDb.setApellidos(usuario.getPersona().getApellidos());
+	        personaDb.setIdentificacion(usuario.getPersona().getIdentificacion());
+	        personaDb.setFechanacimiento(usuario.getPersona().getFechanacimiento());
+	        iPersonaService.save(personaDb);
+	        
         usuarioDb.setUsername(usuario.getUsername());
         usuarioDb.setContrasenia(usuario.getContrasenia());
-        usuarioDb.setMail(usuario.getMail());
+        //usuarioDb.setMail(usuario.getMail());
         usuarioDb.setSessionactive(usuario.getSessionactive());
         usuarioDb.setStatus(usuario.getStatus());
         

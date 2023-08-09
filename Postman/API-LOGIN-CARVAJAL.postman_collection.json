@@ -28,6 +28,26 @@
 					"response": []
 				},
 				{
+					"name": "Ver Persona por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verPersona/16",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verPersona",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Crear Persona",
 					"request": {
 						"method": "POST",
@@ -110,13 +130,52 @@
 			"name": "Tabla Usuario",
 			"item": [
 				{
+					"name": "Listar Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verUsuario/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verUsuario",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Crear Usuario",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"dani1\",\r\n    \"persona\": {\r\n        \"nombres\":\"Daniela Alexandra\",\r\n        \"apellidos\":\"Ruiz Telenchana\",\r\n        \"identificacion\":\"1201201203\",\r\n        \"fechanacimiento\":\"2001-05-11\"\r\n    },\r\n    \"contrasenia\":\"Zaq1234%\",\r\n    \"sessionactive\":\"f\",\r\n    \"status\":\"activo\"\r\n}\r\n//NOTA 1: en el campo sesionactive utilizo \"f\" o \"t\" en representacion de false o true (solo dos valores validos) (se cambia a t cuando se inica sesion)\r\n//NOTA 2: en el campo status se manejan los valores \"activo\" o \"bloqueado\"",
+							"raw": "{\r\n    \"username\":\"dani1\",\r\n    \"persona\": {\r\n        \"nombres\":\"Carlos Sebastiannn\",\r\n        \"apellidos\":\"Carvajal Florenciaaa\",\r\n        \"identificacion\":\"1201201201\",\r\n        \"fechanacimiento\":\"1997-05-11\"\r\n    },\r\n    \"contrasenia\":\"ZZaq1234%\",\r\n    \"sessionactive\":\"f\",\r\n    \"status\":\"activo\"\r\n}\r\n//NOTA 1: en el campo sesionactive utilizo \"f\" o \"t\" en representacion de false o true (solo dos valores validos) (se cambia a t cuando se inica sesion)\r\n//NOTA 2: en el campo status se manejan los valores \"activo\" o \"bloqueado\"",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,19 +197,654 @@
 					"response": []
 				},
 				{
-					"name": "Listar Usuario",
+					"name": "Editar Usuario",
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"sebas1\",\r\n    \"persona\": {\r\n        \"nombres\":\"Carlos Sebastian\",\r\n        \"apellidos\":\"Carvajal Florencia\",\r\n        \"identificacion\":\"1201201201\",\r\n        \"fechanacimiento\":\"1997-09-26\"\r\n    },\r\n    \"contrasenia\":\"Zaq1234%\",\r\n    \"sessionactive\":\"f\",\r\n    \"status\":\"activo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8003/listarUsuario",
+							"raw": "http://localhost:8003/editarUsuario/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8003",
 							"path": [
-								"listarUsuario"
+								"editarUsuario",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarUsuario/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarUsuario",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla Sessiones",
+			"item": [
+				{
+					"name": "Listar Sessiones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarSession",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarSession"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Session por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verSession/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verSession",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idusuario\":12,\r\n        \"fechaingreso\":\"2023-08-07\",\r\n        \"fechacierre\":\"2023-08-08\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearSession",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearSession"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Session",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idusuario\":12,\r\n        \"fechaingreso\":\"2023-07-07\",\r\n        \"fechacierre\":\"2023-07-08\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarSession/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarSession",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Session",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarSession/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarSession",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla Rol",
+			"item": [
+				{
+					"name": "Listar Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Rol por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verRol/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verRol",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rolname\":\"usuariaaoo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearRol",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearRol"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Rol",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rolname\":\"usuario\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarRol/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarRol",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarRol/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarRol",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla Rol - Usuario",
+			"item": [
+				{
+					"name": "Listar Rol - Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarRolUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarRolUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Rol - Usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verRolUsuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verRolUsuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol - Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idusuario\":12,\r\n    \"idrol\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearRolUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearRolUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Rol - Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idusuario\":12,\r\n    \"idrol\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarRolUsuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarRolUsuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol - Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarRolUsuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarRolUsuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla RolOpciones",
+			"item": [
+				{
+					"name": "Listar Rol Opcion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarRolOpciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarRolOpciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Rol Opcion por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verRolOpciones/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verRolOpciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol Opcion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreopcion\":\"opcion 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearRolOpciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearRolOpciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Rol Opcion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreopcion\":\"opcion 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarRolOpciones/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarRolOpciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol Opcion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarRolOpciones/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarRolOpciones",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tabla Rol - RolOpciones",
+			"item": [
+				{
+					"name": "Listar Rol - RolOpciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/listarRol-RolOpciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"listarRol-RolOpciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ver Rol - RolOpciones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/verRol-RolOpciones/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"verRol-RolOpciones",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Rol - RolOpciones",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idopcion\":1,\r\n    \"idrol\":1    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/crearRol-RolOpciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"crearRol-RolOpciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Rol - RolOpciones",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idopcion\":1,\r\n    \"idrol\":1    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8003/editarRol-RolOpciones/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"editarRol-RolOpciones",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Rol - RolOpciones",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/eliminarRol-RolOpciones/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8003",
+							"path": [
+								"eliminarRol-RolOpciones",
+								"7"
 							]
 						}
 					},

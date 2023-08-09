@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.springboot.app.usuarios.models.Persona;
 
-
-
 public interface IPersonaService {
+	
 	public List<Persona> findAll();
 	
 	public Persona findById(Long id);

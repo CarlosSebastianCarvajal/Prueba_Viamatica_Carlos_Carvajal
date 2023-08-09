@@ -29,11 +29,14 @@ create table Usuario(
 );
 --select * from Usuario
 
-create table Sessions(
+
+create table Sessiones(
+	idSession serial not null,
 	fechaIngreso date,
-	fachaCierre date,
+	fechaCierre date,
 	idUsuario integer not null,
-	CONSTRAINT Sessions_Usuario_FK FOREIGN KEY (idUsuario) REFERENCES public.Usuario(idUsuario)
+	CONSTRAINT Sessiones_PK PRIMARY KEY (idSession),
+	CONSTRAINT Sessiones_Usuario_FK FOREIGN KEY (idUsuario) REFERENCES public.Usuario(idUsuario)
 );
 
 create table Rol(
@@ -43,8 +46,10 @@ create table Rol(
 );
 
 create table rolUsuario(
+	idRolUsuario serial not null,
 	idRol integer,
 	idUsuario integer,
+	CONSTRAINT rolUsuario_PK PRIMARY KEY (idRolUsuario),
 	CONSTRAINT rolUsuario_Usuario_FK FOREIGN KEY (idUsuario) REFERENCES public.Usuario(idUsuario),
 	CONSTRAINT rolUsuario_Rol_FK FOREIGN KEY (idRol) REFERENCES public.Rol(idRol)
 );
@@ -54,10 +59,13 @@ create table rolOpciones(
 	nombreOpcion varchar(50),
 	CONSTRAINT rolOpciones_PK PRIMARY KEY (idOpcion)
 );
+select * from rolopciones
 
 create table rolRolOpciones(
+	idRolRolOpciones serial not null,
 	idOpcion integer,
 	idRol integer,
+	CONSTRAINT rolRolOpciones_PK PRIMARY KEY (idRolRolOpciones),
 	CONSTRAINT rolRolOpciones_rolOpciones_FK FOREIGN KEY (idOpcion) REFERENCES public.rolOpciones(idOpcion),
 	CONSTRAINT rolRolOpciones_Rol_FK FOREIGN KEY (idRol) REFERENCES public.Rol(idRol)
 );
