@@ -4,18 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.app.usuarios.models.Persona;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.springboot.app.usuarios.models.IniciarSesion;
 import com.springboot.app.usuarios.models.Usuario;
-import com.springboot.app.usuarios.service.IPersonaService;
 import com.springboot.app.usuarios.service.IUsuarioService;
 
 @RestController
@@ -24,68 +22,41 @@ public class UsuarioController {
 	@Autowired
 	private IUsuarioService iUsuarioService;
 	
-	@Autowired
-	private IPersonaService iPersonaService;
 	
-	@GetMapping("/listarUsuario")
+	@PostMapping("/listarUsuario")
 	public List<Usuario> listar(){
 		return iUsuarioService.findAll();
 	}
 	
-	@GetMapping("/verUsuario/{id}")
+	@PostMapping("/verUsuario/{id}")
 	public Usuario detalle(@PathVariable Long id) {
 		return iUsuarioService.findById(id);
 	}
 	
 	@PostMapping("/crearUsuario")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario crear(@RequestBody Usuario usuario) {
-		
-		Persona persona = iPersonaService.save(usuario.getPersona());
-		usuario.setPersona(persona);
-		usuario.setIdpersona(persona.getIdpersona());
-		usuario.setMail(generarCorreo(persona));
-		return iUsuarioService.save(usuario);
-		
+	public JsonObject crear(@RequestBody Usuario usuario) {
+		return iUsuarioService.save(usuario, 1);
 	}
 	
-	@PutMapping("/editarUsuario/{id}")
+	@PostMapping("/editarUsuario")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Usuario editar(@RequestBody Usuario usuario, @PathVariable Long id) {
-		Usuario usuarioDb = iUsuarioService.findById(id);
-		
-			//segmento para persona   
-			Persona personaDb = iPersonaService.findById(usuarioDb.getPersona().getIdpersona());
-			personaDb.setNombres(usuario.getPersona().getNombres());
-	        personaDb.setApellidos(usuario.getPersona().getApellidos());
-	        personaDb.setIdentificacion(usuario.getPersona().getIdentificacion());
-	        personaDb.setFechanacimiento(usuario.getPersona().getFechanacimiento());
-	        iPersonaService.save(personaDb);
-	        
-        usuarioDb.setUsername(usuario.getUsername());
-        usuarioDb.setContrasenia(usuario.getContrasenia());
-        //usuarioDb.setMail(usuario.getMail());
-        usuarioDb.setSessionactive(usuario.getSessionactive());
-        usuarioDb.setStatus(usuario.getStatus());
-        
-        return iUsuarioService.save(usuarioDb);
+	public JsonObject editar(@RequestBody Usuario usuario) {
+        return iUsuarioService.save(usuario, 2);
 	}
 	
-	@DeleteMapping("/eliminarUsuario/{id}")
+	@PostMapping("/eliminarUsuario/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void eliminar(@PathVariable Long id) {
 		iUsuarioService.deleteById(id);
 	}
 	
-	// Método utilizado para generar el correo segun lo descrito en el documento de indicciones de la prueba  
-	public String generarCorreo(Persona persona) {
-		String nombres = persona.getNombres();
-		String apellidos = persona.getApellidos();
-		
-		String correo_p1 = String.valueOf(nombres.charAt(0));
-		int idx = apellidos.indexOf(" ");
-		correo_p1 = correo_p1 + apellidos.substring(0, idx) + String.valueOf(apellidos.charAt(idx+1)) + "@mail.com";
-		
-		return correo_p1.toLowerCase();
+	
+	//Inicio de sesion
+	@PostMapping("/iniciarSesion")
+	public JsonObject iniciarSesion(@RequestBody IniciarSesion iniciarSesion) {
+		return iUsuarioService.iniciarSesion(iniciarSesion);
 	}
+	
+	
 }

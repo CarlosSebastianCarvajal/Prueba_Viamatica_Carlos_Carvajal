@@ -4,11 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,12 +20,12 @@ public class RolOpcionesController {
 	private IRolOpcionesService iRolOpcionesService;
 	
 	
-	@GetMapping("/listarRolOpciones")
+	@PostMapping("/listarRolOpciones")
 	public List<RolOpciones> listar(){
 		return iRolOpcionesService.findAll();
 	}
 	
-	@GetMapping("/verRolOpciones/{id}")
+	@PostMapping("/verRolOpciones/{id}")
 	public RolOpciones detalle(@PathVariable Long id) {
 		return iRolOpcionesService.findById(id);
 	}
@@ -40,17 +37,13 @@ public class RolOpcionesController {
 		
 	}
 	
-	@PutMapping("/editarRolOpciones/{id}")
+	@PostMapping("/editarRolOpciones")
 	@ResponseStatus(HttpStatus.CREATED)
-	public RolOpciones editar(@RequestBody RolOpciones rolOpciones, @PathVariable Long id) {
-		RolOpciones rolDb = iRolOpcionesService.findById(id);
-		
-		rolDb.setNombreopcion(rolOpciones.getNombreopcion());
-        
-        return iRolOpcionesService.save(rolDb);
+	public RolOpciones editar(@RequestBody RolOpciones rolOpciones) {
+        return iRolOpcionesService.save(rolOpciones);
 	}
 	
-	@DeleteMapping("/eliminarRolOpciones/{id}")
+	@PostMapping("/eliminarRolOpciones/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void eliminar(@PathVariable Long id) {
 		iRolOpcionesService.deleteById(id);

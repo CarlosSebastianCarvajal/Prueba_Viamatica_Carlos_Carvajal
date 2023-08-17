@@ -3,11 +3,11 @@ package com.springboot.app.usuarios.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.DeleteMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +22,12 @@ public class PersonaController {
 	@Autowired
 	private IPersonaService iPersonaService;
 	
-	@GetMapping("/listarPersona")
+	@PostMapping("/listarPersona")
 	public List<Persona> listar(){
 		return iPersonaService.findAll();
 	}
 	
-	@GetMapping("/verPersona/{id}")
+	@PostMapping("/verPersona/{id}")
 	public Persona detalle(@PathVariable Long id) {
 		return iPersonaService.findById(id);
 	}
@@ -39,20 +39,13 @@ public class PersonaController {
 		
 	}
 	
-	@PutMapping("/editarPersona/{id}")
+	@PostMapping("/editarPersona")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Persona editar(@RequestBody Persona persona, @PathVariable Long id) {
-		Persona personaDb = iPersonaService.findById(id);
-		
-		personaDb.setNombres(persona.getNombres());
-        personaDb.setApellidos(persona.getApellidos());
-        personaDb.setIdentificacion(persona.getIdentificacion());
-        personaDb.setFechanacimiento(persona.getFechanacimiento());
-        
-        return iPersonaService.save(personaDb);
+	public Persona editar(@RequestBody Persona persona) {
+        return iPersonaService.save(persona);
 	}
 	
-	@DeleteMapping("/eliminarPersona/{id}")
+	@PostMapping("/eliminarPersona/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void eliminar(@PathVariable Long id) {
 		iPersonaService.deleteById(id);

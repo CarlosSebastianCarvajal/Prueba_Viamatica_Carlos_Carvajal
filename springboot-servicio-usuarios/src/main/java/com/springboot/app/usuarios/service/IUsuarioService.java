@@ -2,6 +2,8 @@ package com.springboot.app.usuarios.service;
 
 import java.util.List;
 
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.springboot.app.usuarios.models.IniciarSesion;
 import com.springboot.app.usuarios.models.Usuario;
 
 public interface IUsuarioService {
@@ -10,7 +12,12 @@ public interface IUsuarioService {
 	
 	public Usuario findById(Long id);
 	
-	public Usuario save(Usuario usuario);
+	public JsonObject save(Usuario usuario, int ident);
 	
 	public void deleteById(Long id);
+	
+	
+	public JsonObject iniciarSesion(IniciarSesion iniciarSesion);
+	
+	public int comprobarCorreo(String cadena);
 }
