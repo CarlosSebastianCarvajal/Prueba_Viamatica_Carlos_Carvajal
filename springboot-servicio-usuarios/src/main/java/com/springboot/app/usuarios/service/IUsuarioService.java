@@ -12,7 +12,9 @@ public interface IUsuarioService {
 	
 	public Usuario findById(Long id);
 	
-	public JsonObject save(Usuario usuario, int ident);
+	public JsonObject save(Usuario usuario);
+	
+	public JsonObject update(Usuario usuario);
 	
 	public void deleteById(Long id);
 	
@@ -20,4 +22,10 @@ public interface IUsuarioService {
 	public JsonObject iniciarSesion(IniciarSesion iniciarSesion);
 	
 	public int comprobarCorreo(String cadena);
+	
+	public int comprobarUsername(String cadena);
+	
+	public int contarIdentificacion(String cadena);
+	
+	public Boolean validarNumRepetidos(String cadena);
 }

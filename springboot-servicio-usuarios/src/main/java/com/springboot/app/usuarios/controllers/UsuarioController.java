@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,13 +35,13 @@ public class UsuarioController {
 	@PostMapping("/crearUsuario")
 	@ResponseStatus(HttpStatus.CREATED)
 	public JsonObject crear(@RequestBody Usuario usuario) {
-		return iUsuarioService.save(usuario, 1);
+		return iUsuarioService.save(usuario);
 	}
 	
 	@PostMapping("/editarUsuario")
 	@ResponseStatus(HttpStatus.CREATED)
 	public JsonObject editar(@RequestBody Usuario usuario) {
-        return iUsuarioService.save(usuario, 2);
+        return iUsuarioService.update(usuario);
 	}
 	
 	@PostMapping("/eliminarUsuario/{id}")
@@ -58,5 +57,22 @@ public class UsuarioController {
 		return iUsuarioService.iniciarSesion(iniciarSesion);
 	}
 	
+	
+	
+	// PARA COMPROBAR MÉTODOS EXTRAS
+	@PostMapping("/contarIdentificacion")
+	public int contarIdentificacion(@RequestBody JsonObject jsonObject) {
+		return iUsuarioService.contarIdentificacion(jsonObject.get("identificacion").toString());
+	}
+	
+	@PostMapping("/comprobarUsername")
+	public int comporbarUsername(@RequestBody JsonObject jsonObject) {
+		return iUsuarioService.comprobarUsername(jsonObject.get("username").toString());
+	}
+	
+	@PostMapping("/validarNumRepetidos")
+	public Boolean validarNumRep(@RequestBody JsonObject jsonObject) {
+		return iUsuarioService.validarNumRepetidos(jsonObject.get("username").toString());
+	}
 	
 }
